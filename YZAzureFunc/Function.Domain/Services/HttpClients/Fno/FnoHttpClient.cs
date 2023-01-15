@@ -72,6 +72,7 @@ namespace YZAzureFunc.Function.Domain.Services.HttpClients.Fno
                 return data;
             }
 
+            // not doing wat i expected.....
             data = await response.Content.ReadFromJsonAsync<FnoResponse>() ?? new();
 
             return data;

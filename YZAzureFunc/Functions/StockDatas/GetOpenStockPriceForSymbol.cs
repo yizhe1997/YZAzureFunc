@@ -31,7 +31,7 @@ namespace YZAzureFunc.Functions.StockDatas
         [OpenApiOperation(operationId: "GetOpenStockPriceForSymbol", tags: new[] { "stock-price/symbol" })]
         [OpenApiParameter(name: "symbol", In = ParameterLocation.Path, Required = true, Type = typeof(string), Description = "Symbol to get stock data from")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "OK response")]
-        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "stock-price/symbol/{symbol:alpha}/open")] HttpRequestData req, string symbol)
+        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "stock-price/symbol/{symbol:alpha}/open")] HttpRequestData req, string symbol)
         {
             _logger.LogInformation($"Getting open stock price for symbol: {symbol}");
 
