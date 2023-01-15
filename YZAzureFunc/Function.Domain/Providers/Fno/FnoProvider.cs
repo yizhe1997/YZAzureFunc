@@ -51,8 +51,8 @@ namespace YZAzureFunc.Function.Domain.Providers.Fno
 
             // Return response received from fno client 
             var fnoResponse = await _client.GetFnoResponseAsync(endPoint, parameter);
-
-            return _mapper.Map<Response>(fnoResponse);
+            var result = _mapper.Map<Response>(fnoResponse);
+            return result;
         }
     }
 }

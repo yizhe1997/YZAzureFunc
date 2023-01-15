@@ -9,7 +9,7 @@ namespace YZAzureFunc.Function.Domain.Authentication
         public async Task<string> GetAccessToken()
         {
             string authority = Environment.GetEnvironmentVariable("AzureAdAuthority") ?? "";
-            string resource = Environment.GetEnvironmentVariable("AzureAdResource") ?? "";
+            string fnoApiBaseUrl = Environment.GetEnvironmentVariable("FnoApiBaseUrl") ?? "";
             string clientId = Environment.GetEnvironmentVariable("AzureAdClientId") ?? "";
             string clientSecret = Environment.GetEnvironmentVariable("AzureAdClientSecret") ?? "";
 
@@ -18,7 +18,8 @@ namespace YZAzureFunc.Function.Domain.Authentication
                 .WithClientSecret(clientSecret)
                 .Build();
 
-            string[] scopes = new string[] { "https://graph.microsoft.com/.default" };
+            // Ref: https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow
+            string[] scopes = new string[] { $"{fnoApiBaseUrl}/.default" };
             AuthenticationResult? authenticationResult = null;
 
             try

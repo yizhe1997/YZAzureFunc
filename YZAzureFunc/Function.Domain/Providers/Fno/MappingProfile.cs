@@ -9,7 +9,7 @@ namespace YZAzureFunc.Function.Domain.Providers.Fno
         public MappingProfile()
         {
             CreateMap<FnoResponse, Response>()
-                .ForMember(c => c.data, opt => opt.MapFrom(src => src.responseEntities.IsEmpty() ? src.responseEntity : src.responseEntities));
+                .ForMember(c => c.data, opt => opt.MapFrom(src => src.responseEntities.IsNullOrDefault() ? src.responseEntity : src.responseEntities));
         }
     }
 }

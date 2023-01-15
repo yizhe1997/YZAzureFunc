@@ -9,9 +9,9 @@ namespace YZAzureFunc.Function.Domain.Helpers.HttpRequestDataHelpers
         {
             string resp = "";
 
-            if (req.Headers.Contains("Context-Token"))
+            if (req.Headers.Contains("contextToken"))
             {
-                return req.Headers.GetValues("Context-Token")?.FirstOrDefault() ?? resp;
+                return req.Headers.GetValues("contextToken")?.FirstOrDefault() ?? resp;
             }
             else
             {
