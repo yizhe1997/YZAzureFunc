@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Net.Http.Json;
 using YZAzureFunc.Function.Domain.Authentication;
@@ -72,8 +73,10 @@ namespace YZAzureFunc.Function.Domain.Services.HttpClients.Fno
                 return data;
             }
 
-            // not doing wat i expected.....
-            data = await response.Content.ReadFromJsonAsync<FnoResponse>() ?? new();
+            // ref: https://code-maze.com/csharp-deserialize-json-into-dynamic-object/
+            // https://stackoverflow.com/questions/63121877/dynamic-c-sharp-valuekind-object
+            string jsonString = await response.Content.ReadAsStringAsync();
+            data = JsonConvert.DeserializeObject<FnoResponse>(jsonString) ?? new();
 
             return data;
         }
