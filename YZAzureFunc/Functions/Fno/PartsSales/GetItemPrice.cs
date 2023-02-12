@@ -28,7 +28,7 @@ namespace YZAzureFunc.Functions.Fno.PartsSales
         [OpenApiOperation(operationId: "GetItemPrice", tags: new[] { "stock-price/symbol" })]
         [OpenApiParameter(name: "contextToken", In = ParameterLocation.Header, Required = true, Type = typeof(string), Description = "Context Token")]
         // Ref: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=isolated-process%2Cfunctionsv2&pivots=programming-language-csharp#api-key-authorization
-        [OpenApiParameter(name: "code", In = ParameterLocation.Path, Required = false, Type = typeof(string), Description = "Host key")]
+        [OpenApiParameter(name: "code", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "Host key")]
         [OpenApiRequestBody("application/json", typeof(ProductIdentifier), Description = "JSON request body ProductIdentifier"), ]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "The OK response message containing a JSON result.")]
         public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequestData req, FunctionContext functionContext)
